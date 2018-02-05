@@ -6,10 +6,22 @@ var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8000;
 
 io.on('connection', socket => {
   console.log('new user connected');
+  socket.on('username', data => {
+    console.log(data);
+  });
+  socket.emit('username', {
+    data: 'hello Abhishek'
+  });
+  socket.on('hojabhagwan', data => {
+    console.log(data);
+    socket.emit('username1', {
+      message: data
+    });
+  });
   socket.on('newnote', message => {
     console.log(message.note);
     socket.emit('sendNote', {
