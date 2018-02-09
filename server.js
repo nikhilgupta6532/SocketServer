@@ -12,9 +12,13 @@ io.on('connection', socket => {
   console.log('new user connected');
   socket.on('username', data => {
     console.log(data);
+    socket.emit('data', {
+      message: data
+    });
   });
   socket.emit('username', {
-    data: 'hello Abhishek'
+    data: 'hello Abhishek',
+    number: 1
   });
   socket.on('hojabhagwan', data => {
     console.log(data);
